@@ -111,3 +111,28 @@ Observable.create { emitter ->
     onError = { it.printStackTrace() }
 )
 ```
+# Unit тестирование
+
+Для Unit тестирование реализован отдельный артефакт `reactive-test`
+
+## Подключение
+В вашем `<project>/<app_module>/build.gradle.kts` добавьте зависимость:
+```kotlin
+dependencies {
+    testImplementation("ru.rustore:reactive-test:0.0.1")
+}
+```
+
+## Тестовый диспатчер
+При тестировании иногопоточного кода следует использовать тестовый диспатчер для запуска тела Unit-теста.
+```kotlin
+@Test
+    fun myTest() = runReactiveTest { testDispatcher ->
+        ////
+    }
+```
+
+`testDispatcher` имеет метод `advanceTime`, который позволяет смещать время вперед для более удобного тестирования цепочек, в которых присутствуют вызовы `delay()`
+
+## Тестовые слушатели
+Для тестирования цепочек присутствуют классы `TestObservableObserver`, `TestSingleObserver`, которые имеют механизмы проверок вызова соответствующих колбэков и получения результата цепочек.

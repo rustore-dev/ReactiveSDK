@@ -1,6 +1,10 @@
 [versions]
 agp = "8.5.2"
 kotlin = "1.7.20"
+junit = "5.9.3"
+
+[libraries]
+junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
